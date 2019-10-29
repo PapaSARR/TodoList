@@ -1,11 +1,12 @@
 <section class="todoapp">
   <header class="header">
-    <h1>{{titre}}</h1>
-    <form>
+    <h1>{{titre}}</h1> <!--Affichage du titre de la liste -->
+    <form (submit)="appendItem(newTodoInput.value) ; newTodoInput.value = ''"> <!-- Pour l'ajout d'un todoItem -->
       <input  #newTodoInput
               name        = "newTodoInput"
               class       = "new-todo"
               placeholder = "Que faire?"
+              (blur)="appendItem(newTodoInput.value); newTodoInput.value=''"
               autofocus />
     </form>
   </header>
@@ -13,12 +14,16 @@
     <input  class="toggle-all"
             type="checkbox"
             name="toggleAll"
-    />
+            [hidden] ="items.length==0" [ngModel] (ngModelChange)="itemsDone(items,$event)"
+    /> <!--Appel de la méthode itemsDone si le checkbox est cliqué, checkbox caché si pas de todoItem-->
     <ul class="todo-list">
+      <li *ngFor="let item of items" [class.completed]="item.isDone" [class.editing]="itemRef.labelChanging"> <!--On applique la classe css completed si le todoItem est fait et editing si l'utilisauter souhaite éditer le label du todoItem-->
+        <app-todo-item [data]= "item" #itemRef></app-todo-item> <!--On passe chaque todoItem à la composante fille pour l'affichage -->
+      </li>
     </ul>
   </section>
   <footer class="footer">
-    <span class="todo-count"><strong></strong> restantes</span>
+    <span class="todo-count"><strong></strong>{{itemsRestantes}} restantes</span>  <!--Affichage du nbre de todoItems pas encore faits -->
     <ul class="filters">
       <li>
         <a class="filterAll">Tous</a>
@@ -34,3 +39,58 @@
   </footer>
 </section>
 <hr/>
+
+<!--Version debug de la liste V1-->
+<h2>Debug V1</h2>
+<ul>
+  <li *ngFor="let item of items">
+    {{item | json}}
+  </li>
+</ul>
+
+<!--Version debug de la liste V2, si on clique sur checkbox, le json n'est pas modifié-->
+<h2>Debug V2</h2>
+<ul>
+  <li *ngFor="let item of items">
+    <input type="checkbox" [ngModel]="item.isDone"/>
+    <label>{{item.label}}</label>
+    <pre>{{item | json}}</pre>
+  </li>
+</ul>
+
+<!--Version debug de la liste V3-->
+<h2>Debug V3</h2>
+<ul>
+  <li *ngFor="let item of items">
+    <input type="checkbox" [ngModel]="item.isDone" (ngModelChange)="itemDone(item,$event)"/>
+    <label>{{item.label}}</label>
+    <pre>{{item | json}}</pre>
+  </li>
+</ul>
+
+<!--Version debug de la liste V4-->
+<h2>Debug V4</h2>
+<ul>
+  <li *ngFor="let item of items">
+    <input type="checkbox" [ngModel]="item.isDone" (ngModelChange)="itemDone(item,$event)"/>
+    <form (submit)="itemLabel(item, newLab.value)">
+      <input type="text" name="label" [ngModel]="item.label" #newLab/>
+    </form>
+    <label>{{item.label}}</label>
+    <pre>{{item | json}}</pre>
+  </li>
+</ul>
+
+<!--Version debug de la liste V5-->
+<h2>Debug V5</h2>
+<ul>
+  <li *ngFor="let item of items">
+    <input type="checkbox" [ngModel]="item.isDone" (ngModelChange)="itemDone(item,$event)"/>
+    <form (submit)="itemLabel(item, newLab.value)">
+      <input type="text" name="label" [ngModel]="item.label" #newLab/>
+    </form>
+    <button (click)="removeItem(item)">DELETE</button>
+    <label>{{item.label}}</label>
+    <pre>{{item | json}}</pre>
+  </li>
+</ul>

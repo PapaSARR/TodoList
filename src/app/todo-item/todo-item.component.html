@@ -1,13 +1,16 @@
-<div class="view">
+<div class="view" *ngIf="data">
   <input 	class			= "toggle"
           type			= "checkbox"
           name			= "fait"
-  />
-  <label 	class="texte"></label>
-  <button class="destroy"></button>
+          [ngModel]="isDone" (ngModelChange)="itemDone(data,$event)"
+  /> <!--Appel de la méthode itemDone quand le checkbox est coché-->
+  <label (click)="edit()" class="texte">{{label}}</label> <!--On affiche le label du todoItem par interpolation et on appelle la méthode edith() quand l'utilisateur double-clique sur le label-->
+  <button class="destroy" (click)="removeItem(data)"></button> <!--Appel de la méthode removeItem pour quand le bouton est cliqué-->
 </div>
-<form>
+<form (submit)="itemLabel(data,newTextInput.value)"> <!--Appel de la méthode itemLabel pour changer le label -->
   <input  #newTextInput
+          [ngModel]="data.label"
           name    = "newTextInput"
-          class   = "edit"/>
+          (blur) = "itemLabel(data,newTextInput.value)"
+          class   = "edit"/> <!--(blur) permet l'appel de la méthode itemLabel après un clique de l'utilisateur quelque part sur la page-->
 </form>
