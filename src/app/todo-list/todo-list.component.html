@@ -14,7 +14,7 @@
     <input  class="toggle-all"
             type="checkbox"
             name="toggleAll"
-            [hidden] ="items.length==0" [ngModel] (ngModelChange)="itemsDone(items,$event)"
+            [hidden] ="items.length==0" [checked]="!itemsRestantes" [ngModel] (ngModelChange)="itemsDone(items,$event)"
     /> <!--Appel de la méthode itemsDone si le checkbox est cliqué, checkbox caché si pas de todoItem-->
     <ul class="todo-list">
       <li *ngFor="let item of items" [class.completed]="item.isDone" [class.editing]="itemRef.labelChanging"> <!--On applique la classe css completed si le todoItem est fait et editing si l'utilisauter souhaite éditer le label du todoItem-->
