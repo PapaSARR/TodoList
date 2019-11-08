@@ -15,15 +15,15 @@
             type="checkbox"
             name="toggleAll"
             [hidden] ="items.length==0" [checked]="!itemsRestantes" [ngModel] (ngModelChange)="itemsDone(items,$event)"
-    /> <!--Appel de la méthode itemsDone si le checkbox est cliqué, checkbox caché si pas de todoItem-->
+    /> <!--Appel de la méthode itemsDone si le checkbox est cliqué, checkbox caché si pas de todoItem et checké si pas de todoItem active-->
     <ul class="todo-list">
-      <li *ngFor="let item of items" [class.completed]="item.isDone" [class.editing]="itemRef.labelChanging"> <!--On applique la classe css completed si le todoItem est fait et editing si l'utilisauter souhaite éditer le label du todoItem-->
-        <app-todo-item [data]= "item" #itemRef></app-todo-item> <!--On passe chaque todoItem à la composante fille pour l'affichage -->
+      <li *ngFor="let item of items" [class.completed]="item.isDone" [class.editing]="itemRef.editing==true" (dblclick)="edit(itemRef)"> <!--On applique la classe css completed si la todoItem est faite et editing si l'utilisateur souhaite éditer le label de la todoItem-->
+        <app-todo-item [data]= "item" #itemRef></app-todo-item> <!--On passe chaque todoItem de la liste au composant fils-->
       </li>
     </ul>
   </section>
   <footer class="footer">
-    <span class="todo-count"><strong></strong>{{itemsRestantes}} restantes</span>  <!--Affichage du nbre de todoItems pas encore faits -->
+    <span class="todo-count"><strong></strong>{{itemsRestantes}} restantes</span>  <!--Affichage du nbre de todoItems actives -->
     <ul class="filters">
       <li>
         <a class="filterAll">Tous</a>

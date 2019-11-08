@@ -13,6 +13,8 @@ export class TodoListComponent implements OnInit {
   private titre: string;
   @Input()
   private data: TodoListData;
+
+
   constructor(private todoService: TodoService) {
     todoService.getTodoListDataObserver().subscribe(tdl => this.data = tdl); /**Appel du service pour récupérer le TodoList**/
     this.titre = this.data.label;  /**Titre du TodoList**/
@@ -38,9 +40,13 @@ export class TodoListComponent implements OnInit {
 
   /**Ajout d'un todoItem**/
   appendItem(label: string){
-    this.todoService.appendItems(
-      {label, isDone: false}
-    );
+    if(label !== ''){
+      this.todoService.appendItems(
+        {label, isDone: false}
+      );
+    }else{
+      return;
+    }
   }
 
   /**On change l'état du todoItem **/
@@ -60,5 +66,10 @@ export class TodoListComponent implements OnInit {
   /**Suppression du todoItem**/
   removeItem(item: TodoItemData){
     this.todoService.removeItems(item);
+  }
+
+  /**Passe l'édition du label à true**/
+  edit(item){
+    item.editing = true;
   }
 }
