@@ -23,27 +23,27 @@ export class TodoItemComponent implements OnInit {
   }
 
   /**On récupère le label de la todoItem **/
-  get label(){
+  get label(): string{
     return this.data.label;
   }
 
   /**On récupère l'état de la todoItem (fait ou pas fait) **/
-  get isDone(){
+  get isDone(): boolean{
     return this.data.isDone;
   }
 
   /**On change l'état de la todoItem **/
-  itemDone(item: TodoItemData, done: boolean){
+  itemDone(item: TodoItemData, done: boolean): void{
     this.todoService.setItemsDone(done, item);
   }
 
   /**Suppression de la todoItem**/
-  removeItem(data: TodoItemData) {
+  removeItem(data: TodoItemData): void {
     this.todoService.removeItems(data);
   }
 
   /**On change le label de la todoItem **/
-  itemLabel(item: TodoItemData, label: string){
+  itemLabel(item: TodoItemData, label: string): void{
     this.todoService.setItemsLabel(label, item);
   }
 }

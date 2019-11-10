@@ -1,13 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-
 import { AppComponent } from './app.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoItemComponent } from './todo-item/todo-item.component';
 import {TodoService} from './todo.service';
 import {FormsModule} from '@angular/forms';
-
+import {AutofocusModule} from 'angular-autofocus-fix';
 
 @NgModule({
   declarations: [
@@ -16,7 +14,7 @@ import {FormsModule} from '@angular/forms';
     TodoItemComponent
   ],
   imports: [
-    BrowserModule, FormsModule
+    BrowserModule, FormsModule, AutofocusModule
   ],
   providers: [TodoService],
   bootstrap: [AppComponent]
