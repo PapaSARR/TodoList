@@ -22,7 +22,7 @@
       </li>
     </ul>
   </section>
-  <footer class="footer">
+  <footer class="footer" *ngIf="items.length!=0">
     <span class="todo-count"><strong></strong>{{itemsRestantes}} restantes</span>  <!--Affichage du nbre de todoItems actives -->
     <ul class="filters">
       <li>
