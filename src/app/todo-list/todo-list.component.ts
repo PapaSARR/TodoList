@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {TodoListData} from '../dataTypes/TodoListData';
 import {TodoItemData} from '../dataTypes/TodoItemData';
 import {TodoService} from '../todo.service';
@@ -13,6 +13,7 @@ export class TodoListComponent implements OnInit {
   private titre: string;
   @Input()
   private data: TodoListData;
+  @ViewChild("newTodoInput", {static: false}) newTodoInput: ElementRef;
   private filter: string;
 
 
@@ -22,11 +23,6 @@ export class TodoListComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
-
-  /**Récupère le titre du TodoList**/
-  get label(): string {
-    return this.data ? this.data.label : '';
   }
 
   /**Récupère le tableau des todoItems**/
@@ -55,10 +51,17 @@ export class TodoListComponent implements OnInit {
     this.todoService.setItemsDone(done, item);
   }
 
-  /**On change l'état des todoItems **/
-  itemsDone(items: TodoItemData[], done: boolean): void{
-    this.todoService.setItemsDone(done, ...items);
+  /**Renvoie true si tous les todoItems sont faites **/
+  isAllDone(): boolean {
+    return this.items.every( it => it.isDone );
   }
+
+  /**S'il existe des todoItems actives dans la liste, on change leurs états à complétées**/
+  toggleAllDone(): void {
+    const done = !this.isAllDone();
+    this.todoService.setItemsDone(done, ...this.items);
+  }
+
   /**On change le label de la todoItem **/
   itemLabel(item: TodoItemData, label: string): void{
     this.todoService.setItemsLabel(label, item);
@@ -67,11 +70,6 @@ export class TodoListComponent implements OnInit {
   /**Suppression de la todoItem**/
   removeItem(item: TodoItemData): void{
     this.todoService.removeItems(item);
-  }
-
-  /**Passe l'édition du label à true**/
-  edit(item): void{
-    item.editing = true;
   }
 
   /**Liste des todoItems avec filtrage**/

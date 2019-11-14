@@ -2,15 +2,15 @@
   <input 	class			= "toggle"
           type			= "checkbox"
           name			= "fait"
-          [ngModel]="isDone" (ngModelChange)="itemDone(data,$event)"
-  /> <!--Appel de la méthode itemDone quand le checkbox est coché-->
-  <label class="texte">{{label}}</label> <!--On affiche le label de la todoItem par interpolation-->
-  <button class="destroy" (click)="removeItem(data)"></button> <!--Appel de la méthode removeItem quand le bouton est cliqué-->
+          [ngModel]="isDone" (ngModelChange)="isDone = $event"
+  /> <!--Changement de l'état de la todoItem quand le checkbox est coché-->
+  <label class="texte" (dblclick)="editing = true">{{label}}</label> <!--On affiche le label de la todoItem par interpolation, l'état de l'édition est passé à true si on double clique sur le label de la todoItem-->
+  <button class="destroy" (click)="remove()"></button> <!--Appel de la méthode remove quand le bouton est cliqué-->
 </div>
-<form (submit)="itemLabel(data,newTextInput.value)"> <!--Appel de la méthode itemLabel pour changer le label -->
+<form *ngIf="editing"(submit)="label = newTextInput.value"> <!--Changement du label quand on valide l'entrée -->
   <input  #newTextInput
-          [ngModel]="data.label"
+          [ngModel]="label"
           name = "newTextInput"
-          (blur) = "itemLabel(data,newTextInput.value)"
-          autofocus class = "edit"  /> <!--(blur) permet l'appel de la méthode itemLabel même si l'utilisateur clique ailleurs sur la page sans appuyer sur Entrée-->
+          (blur)  = "label = newTextInput.value"
+          autofocus class = "edit"  /> <!--(blur) permet le changement du label même si l'utilisateur clique ailleurs sur la page sans appuyer sur Entrée-->
 </form>

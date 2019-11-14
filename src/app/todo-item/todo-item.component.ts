@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {TodoItemData} from "../dataTypes/TodoItemData";
 import {TodoService} from "../todo.service";
 
@@ -12,8 +12,9 @@ export class TodoItemComponent implements OnInit {
   /**On récupère la todoItem passée depuis le composant père**/
   @Input()
   private data: TodoItemData;
-  /**Etat de l'édition du label**/
-  editing: boolean;
+  @ViewChild("newTextInput", {static: false}) private inputLabel: ElementRef;
+  /**Etat de l'édition du label initialisé à false**/
+  private _editing: boolean = false;
 
   /**On injecte le service TodoService**/
   constructor(private todoService: TodoService) {
@@ -27,23 +28,35 @@ export class TodoItemComponent implements OnInit {
     return this.data.label;
   }
 
+  /**On change le label de la todoItem **/
+  set label(lab: string) {
+    this.todoService.setItemsLabel(lab, this.data);
+  }
+
   /**On récupère l'état de la todoItem (fait ou pas fait) **/
   get isDone(): boolean{
     return this.data.isDone;
   }
 
   /**On change l'état de la todoItem **/
-  itemDone(item: TodoItemData, done: boolean): void{
-    this.todoService.setItemsDone(done, item);
+  set isDone(done: boolean) {
+    this.todoService.setItemsDone(done, this.data);
+  }
+
+  /**On récupère l'état de l'édition du label **/
+  get editing(): boolean {
+    return this._editing;
+  }
+
+  /**On change l'état de l'édition du label **/
+  set editing(e: boolean) {
+    this._editing = e;
+    requestAnimationFrame(() => this.inputLabel.nativeElement.focus());
   }
 
   /**Suppression de la todoItem**/
-  removeItem(data: TodoItemData): void {
-    this.todoService.removeItems(data);
+  remove(): void {
+    this.todoService.removeItems(this.data);
   }
 
-  /**On change le label de la todoItem **/
-  itemLabel(item: TodoItemData, label: string): void{
-    this.todoService.setItemsLabel(label, item);
-  }
 }

@@ -14,10 +14,10 @@
     <input  class="toggle-all"
             type="checkbox"
             name="toggleAll"
-            [hidden] ="items.length==0" [checked]="!itemsRestantes" [ngModel] (ngModelChange)="itemsDone(items,$event)"
-    /> <!--Appel de la méthode itemsDone si le checkbox est cliqué, checkbox caché si pas de todoItem et checké si pas de todoItem active-->
+            [hidden] ="items.length==0" [checked]="!itemsRestantes" [ngModel]="isAllDone()" (ngModelChange)="toggleAllDone()"
+    /> <!--Appel de la méthode toggleAllDone si le checkbox est cliqué, le checkbox est caché si pas de todoItem et checké automatiquement si pas de todoItem active-->
     <ul class="todo-list">
-      <li *ngFor="let item of todosFiltered() " [class.completed]="item.isDone" [class.editing]="itemRef.editing==true" (dblclick)="edit(itemRef)"> <!--On applique la classe css completed si la todoItem est faite et editing si l'utilisateur souhaite éditer le label de la todoItem-->
+      <li *ngFor="let item of todosFiltered() " [class.completed]="item.isDone" [class.editing]="itemRef.editing==true"> <!--On applique la classe css completed si la todoItem est faite et editing si l'utilisateur souhaite éditer le label de la todoItem-->
         <app-todo-item [data]= "item" #itemRef></app-todo-item> <!--On passe chaque todoItem de la liste au composant fils-->
       </li>
     </ul>
