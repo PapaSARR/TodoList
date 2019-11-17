@@ -14,7 +14,7 @@
     <input  class="toggle-all"
             type="checkbox"
             name="toggleAll"
-            [hidden] ="items.length==0" [checked]="!itemsRestantes" [ngModel]="isAllDone()" (ngModelChange)="toggleAllDone()"
+            [hidden] ="items.length===0" [checked]="!itemsRestantes" [ngModel]="isAllDone()" (ngModelChange)="toggleAllDone()"
     /> <!--Appel de la méthode toggleAllDone si le checkbox est cliqué, le checkbox est caché si pas de todoItem et checké automatiquement si pas de todoItem active-->
     <ul class="todo-list">
       <li *ngFor="let item of todosFiltered() " [class.completed]="item.isDone" [class.editing]="itemRef.editing==true"> <!--On applique la classe css completed si la todoItem est faite et editing si l'utilisateur souhaite éditer le label de la todoItem-->
@@ -22,7 +22,7 @@
       </li>
     </ul>
   </section>
-  <footer class="footer" *ngIf="items.length!=0">
+  <footer class="footer" *ngIf="items.length!==0">
     <span class="todo-count"><strong></strong>{{itemsRestantes}} restantes</span>  <!--Affichage du nbre de todoItems actives -->
     <ul class="filters">
       <li>
@@ -38,6 +38,13 @@
     <button *ngIf="setUpClearbutton()" (click)="clearCompleted()" class="clear-completed">Supprimer cochées</button>  <!--Le bouton n'est instauré que s'il existe au moins une todoItem complétée dans la liste -->
   </footer>
 </section>
+<table>
+  <tr>
+    <th><button [disabled]="todoService.undo.length===0" class="undo-redo" (click)="undo()">Undo</button></th>  <!--Bouton désactivé si pas de liste d'items dans undo, si le bouton est cliqué on appelle la methode undo() pour annuler l'action-->
+    <th><button [disabled]="todoService.redo.length===0" class="undo-redo" (click)="redo()">Redo</button></th>  <!--Bouton désactivé si pas de liste d'items dans redo,  si le bouton est cliqué on appelle la methode redo() pour refaire l'action-->
+    <th><button class="undo-redo" (click)="clearAll()">Clean All</button></th> <!--On fait appel à la méthode cleanAll() pour effacer toutes les listes d'items-->
+  </tr>
+</table>
 <hr/>
 
 <!--Version debug de la liste V1-->

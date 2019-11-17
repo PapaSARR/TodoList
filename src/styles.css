@@ -378,3 +378,19 @@ html .clear-completed:active {
     bottom: 10px;
   }
 }
+
+.undo-redo {
+  border: 1px solid #FFEBCD;
+  background-color: #A52A2A;
+  color: #ffffff;
+  padding: 10px 15px;
+}
+
+.undo-redo:disabled,
+.undo-redo[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+

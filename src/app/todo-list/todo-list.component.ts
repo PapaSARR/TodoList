@@ -93,4 +93,23 @@ export class TodoListComponent implements OnInit {
   clearCompleted(): void{
     this.data.items = this.items.filter(item => !item.isDone);
   }
+
+  /**On annule l'action courante en remettant items à sa valeur précédente**/
+  undo(): void {
+    this.todoService.redo.push(this.items);
+    this.data.items = this.todoService.undo.pop();
+  }
+
+  /**Items reprend sa nouvelle valeur**/
+  redo(): void {
+    this.todoService.undo.push(this.items);
+    this.data.items = this.todoService.redo.pop();
+  }
+
+  /**On efface tout**/
+  clearAll(): void {
+    this.data.items = [];
+    this.todoService.undo = [];
+    this.todoService.redo = [];
+  }
 }
