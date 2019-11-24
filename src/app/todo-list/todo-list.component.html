@@ -29,10 +29,10 @@
         <a [class.selected]="filter==='all'" (click)="filter='all'" class="filterAll" href="#/">Tous</a> <!--Si filter est égale à 'all', toutes les todoItems sont affichées -->
       </li>
       <li>
-        <a [class.selected]="filter==='active'" (click)="filter='active'" class="filterActives" href="#/active">Actifs</a> <!--Si filter est égale à 'active', seules les todoItems actives sont affichées -->
+        <a [class.selected]="filter==='active'" (click)="filter='active'" class="filterActives" href="#/">Actifs</a> <!--Si filter est égale à 'active', seules les todoItems actives sont affichées -->
       </li>
       <li>
-        <a [class.selected]="filter==='completed'" (click)="filter='completed'" class="filterCompleted" href="#/completed">Complétés</a> <!--Si filter est égale à 'completed', seules les todoItems complétées sont affichées -->
+        <a [class.selected]="filter==='completed'" (click)="filter='completed'" class="filterCompleted" href="#/">Complétés</a> <!--Si filter est égale à 'completed', seules les todoItems complétées sont affichées -->
       </li>
     </ul>
     <button *ngIf="setUpClearbutton()" (click)="clearCompleted()" class="clear-completed">Supprimer cochées</button>  <!--Le bouton n'est instauré que s'il existe au moins une todoItem complétée dans la liste -->
@@ -40,7 +40,7 @@
 </section>
 <table>
   <tr>
-    <th><button [disabled]="todoService.undo.length===0" class="undo-redo" (click)="undo()">Undo</button></th>  <!--Bouton désactivé si pas de liste d'items dans undo, si le bouton est cliqué on appelle la methode undo() pour annuler l'action-->
+    <th><button [disabled]="todoService.undo.length==0" class="undo-redo" (click)="undo()">Undo</button></th>  <!--Bouton désactivé si pas de liste d'items dans undo, si le bouton est cliqué on appelle la methode undo() pour annuler l'action-->
     <th><button [disabled]="todoService.redo.length===0" class="undo-redo" (click)="redo()">Redo</button></th>  <!--Bouton désactivé si pas de liste d'items dans redo,  si le bouton est cliqué on appelle la methode redo() pour refaire l'action-->
     <th><button class="undo-redo" (click)="clearAll()">Clean All</button></th> <!--On fait appel à la méthode cleanAll() pour effacer toutes les listes d'items-->
   </tr>

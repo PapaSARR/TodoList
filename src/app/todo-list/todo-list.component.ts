@@ -16,7 +16,6 @@ export class TodoListComponent implements OnInit {
   @ViewChild("newTodoInput", {static: false}) newTodoInput: ElementRef;
   private filter: string;
 
-
   constructor(private todoService: TodoService) {
     todoService.getTodoListDataObserver().subscribe(tdl => this.data = tdl); /**Appel du service pour récupérer le TodoList**/
     this.titre = this.data.label;  /**Titre du TodoList**/
@@ -91,25 +90,36 @@ export class TodoListComponent implements OnInit {
 
   /**Supprime les todoItems complétées de la liste**/
   clearCompleted(): void{
-    this.data.items = this.items.filter(item => !item.isDone);
+    /*this.data.items = this.items.filter(item => !item.isDone);*/
+    const itemsDone = this.items.filter(item => item.isDone);
+    this.todoService.removeItems(...itemsDone);
   }
 
-  /**On annule l'action courante en remettant items à sa valeur précédente**/
+  /**On remet à items sa valeur précédente puis on met à jour les données du localStorage**/
   undo(): void {
     this.todoService.redo.push(this.items);
     this.data.items = this.todoService.undo.pop();
+    this.todoService.setLocalStorageRedo(this.todoService.redo);
+    this.todoService.setLocalStorageItems(this.data.items);
+    this.todoService.setLocalStorageUndo(this.todoService.undo);
   }
 
-  /**Items reprend sa nouvelle valeur**/
+  /**Items reprend sa nouvelle valeur puis on met à jour les données du localStorage**/
   redo(): void {
     this.todoService.undo.push(this.items);
     this.data.items = this.todoService.redo.pop();
+    this.todoService.setLocalStorageUndo(this.todoService.undo);
+    this.todoService.setLocalStorageItems(this.data.items);
+    this.todoService.setLocalStorageRedo(this.todoService.redo);
   }
 
-  /**On efface tout**/
+  /**On efface tout puis on met à jour les données du localStorage**/
   clearAll(): void {
-    this.data.items = [];
-    this.todoService.undo = [];
-    this.todoService.redo = [];
+    this.data.items.length = 0;
+    this.todoService.undo.length = 0;
+    this.todoService.redo.length = 0;
+    this.todoService.setLocalStorageItems(this.data.items);
+    this.todoService.setLocalStorageUndo(this.todoService.undo);
+    this.todoService.setLocalStorageRedo(this.todoService.redo);
   }
 }
