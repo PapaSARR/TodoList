@@ -381,7 +381,7 @@ html .clear-completed:active {
 
 .undo-redo {
   border: 1px solid #FFEBCD;
-  background-color: #A52A2A;
+  background-color: #081c72;
   color: #ffffff;
   padding: 10px 15px;
 }
@@ -391,6 +391,25 @@ html .clear-completed:active {
   border: 1px solid #999999;
   background-color: #cccccc;
   color: #666666;
+}
+
+.navUl {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #081c72;
+}
+
+.navLi {
+  float: right;
+}
+.navA {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
 
 
