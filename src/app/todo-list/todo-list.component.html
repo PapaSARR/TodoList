@@ -26,13 +26,13 @@
     <span class="todo-count"><strong></strong>{{itemsRestantes}} restantes</span>  <!--Affichage du nbre de todoItems actives -->
     <ul class="filters">
       <li>
-        <a [class.selected]="filter==='all'" (click)="filter='all'" class="filterAll" href="#/">Tous</a> <!--Si filter est égale à 'all', toutes les todoItems sont affichées -->
+        <a [class.selected]="filter==='all'" (click)="filter='all'" class="filterAll">Tous</a> <!--Si filter est égale à 'all', toutes les todoItems sont affichées -->
       </li>
       <li>
-        <a [class.selected]="filter==='active'" (click)="filter='active'" class="filterActives" href="#/">Actifs</a> <!--Si filter est égale à 'active', seules les todoItems actives sont affichées -->
+        <a [class.selected]="filter==='active'" (click)="filter='active'" class="filterActives">Actifs</a> <!--Si filter est égale à 'active', seules les todoItems actives sont affichées -->
       </li>
       <li>
-        <a [class.selected]="filter==='completed'" (click)="filter='completed'" class="filterCompleted" href="#/">Complétés</a> <!--Si filter est égale à 'completed', seules les todoItems complétées sont affichées -->
+        <a [class.selected]="filter==='completed'" (click)="filter='completed'" class="filterCompleted">Complétés</a> <!--Si filter est égale à 'completed', seules les todoItems complétées sont affichées -->
       </li>
     </ul>
     <button *ngIf="setUpClearbutton()" (click)="clearCompleted()" class="clear-completed">Supprimer cochées</button>  <!--Le bouton n'est instauré que s'il existe au moins une todoItem complétée dans la liste -->

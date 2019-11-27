@@ -15,7 +15,9 @@ import { HeaderComponent } from './header/header.component';
 const appRoutes: Routes = [
   { path: 'auth/signup', component: SignupComponent },
   { path: 'auth/signin', component: SigninComponent },
-  { path: 'todolist', component: TodoListComponent }
+  { path: 'todolist', canActivate: [AuthGuardService], component: TodoListComponent },
+  { path: '', redirectTo: 'todolist', pathMatch: 'full' },
+  { path: '**', redirectTo: 'todolist' }
 ];
 @NgModule({
   declarations: [
