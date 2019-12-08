@@ -1,7 +1,7 @@
+<!--Menu de navigation-->
 <ul class="navUl">
   <li class="navLi"><a class="navA" style="cursor:pointer" (click)="onSignOut()" *ngIf="isAuth">Déconnexion</a></li>
   <li class="navLi" routerLinkActive="active" *ngIf="!isAuth"><a class="navA" routerLink="auth/signup">Créer un compte</a></li>
   <li class="navLi" routerLinkActive="active" *ngIf="!isAuth"><a class="navA" routerLink="auth/signin">Connexion</a></li>
   <li class="navLi" style="float:left" routerLinkActive="active"><a class="navA" routerLink="todolist">TodoList App</a></li>
-
 </ul>

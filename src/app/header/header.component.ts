@@ -9,11 +9,12 @@ import * as firebase from 'firebase';
 })
 export class HeaderComponent implements OnInit {
 
-  isAuth: boolean;
+  isAuth: boolean; /**Etat de l'authentification de l'utilisateur**/
 
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    /**Pour l'affichage du menu de naviguation de manière contextuelle**/
     firebase.auth().onAuthStateChanged(
       (user) => {
         if(user) {

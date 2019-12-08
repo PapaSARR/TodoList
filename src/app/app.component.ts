@@ -8,6 +8,7 @@ import * as firebase from 'firebase';
 })
 export class AppComponent {
   constructor(){
+    /**Configuration firebase**/
     var firebaseConfig = {
       apiKey: "AIzaSyAMaYlPyHjyYadvB7Q7Lqx-Gxf66uiR6rg",
       authDomain: "todolist-a7191.firebaseapp.com",

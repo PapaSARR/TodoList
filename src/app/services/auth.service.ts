@@ -8,6 +8,10 @@ export class AuthService {
 
   constructor() { }
 
+  /**Les méthodes de création, de connexion et de déconnexion suivantes sont asynchrones
+   * Donc on retourne des Promise pour pouvoir gérer les situations d'erreur
+   */
+
   /**Pour créer un nouvel utilisateur**/
   createNewUser(email: string, password: string) {
     return new Promise(

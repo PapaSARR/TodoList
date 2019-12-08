@@ -28,6 +28,7 @@ export class SigninComponent implements OnInit {
     });
   }
 
+  /**Méthode pour connecter l'utilisateur**/
   onSubmit() {
     const email = this.signinForm.get('email').value;
     const password = this.signinForm.get('password').value;

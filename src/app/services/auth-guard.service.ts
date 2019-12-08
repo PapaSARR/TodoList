@@ -8,6 +8,9 @@ export class AuthGuardService implements CanActivate {
 
   constructor(private router: Router) { }
 
+  /**Pour protéger la route du todolist si le user n'est pas connecté
+   * Retourne une Promise puisque la vérification de l'authentification est asynchrone
+   **/
   canActivate(): Observable<boolean> | Promise<boolean> | boolean {
     return new Promise(
       (resolve, reject) => {
