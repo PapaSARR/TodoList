@@ -40,9 +40,9 @@
 </section>
 <table>
   <tr>
-    <th><button [disabled]="todoService.undo.length==0" class="undo-redo" (click)="undo()">Undo</button></th>  <!--Bouton désactivé si pas de liste d'items dans undo, si le bouton est cliqué on appelle la methode undo() pour annuler l'action-->
+    <th><button [disabled]="todoService.undo.length===0" class="undo-redo" (click)="undo()">Undo</button></th>  <!--Bouton désactivé si pas de liste d'items dans undo, si le bouton est cliqué on appelle la methode undo() pour annuler l'action-->
     <th><button [disabled]="todoService.redo.length===0" class="undo-redo" (click)="redo()">Redo</button></th>  <!--Bouton désactivé si pas de liste d'items dans redo,  si le bouton est cliqué on appelle la methode redo() pour refaire l'action-->
-    <th><button class="undo-redo" (click)="clearAll()">Clean All</button></th> <!--On fait appel à la méthode cleanAll() pour effacer toutes les listes d'items-->
+    <th><button class="undo-redo" (click)="clearAll()">Clear All</button></th> <!--On fait appel à la méthode cleanAll() pour effacer toutes les listes d'items-->
   </tr>
 </table>
 <hr/>
