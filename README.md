@@ -32,8 +32,7 @@ Dans le console firebase, on créé un projet pour héberger notre application T
 Pour terminer, il est nécessaire d'avoir un composant signup pour la création d'un user, un composant signin pour gérer la connexion d'un user ainsi que deux services,
 un pour gérer ces fonctions et un autre (service de garde) pour protéger le TodoList App si un user n'est pas connecté.
 Vous pouvez tester l'application en vous connectant avec les identifiants suivants que j'ai créé:
-##### blarre@test.fr    (adresse email)
-##### blarre            (mot de passe)
+##### Adresse email: blarre@test.fr     ----     Mot de passe: blarre
 Vous avez aussi la possibilité de créer un compte en cliquant sur "Créer un compte".
 
 ## Difficultés rencontrées
