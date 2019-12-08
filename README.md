@@ -31,6 +31,10 @@ Pour cette fonctionnalité, on veut ajouter un système d'authentification à no
 Dans le console firebase, on créé un projet pour héberger notre application TodoList, ensuite on configure le mode connexion adresse email/mot de passe.
 Pour terminer, il est nécessaire d'avoir un composant signup pour la création d'un user, un composant signin pour gérer la connexion d'un user ainsi que deux services,
 un pour gérer ces fonctions et un autre (service de garde) pour protéger le TodoList App si un user n'est pas connecté.
+Vous pouvez tester l'application en vous connectant avec les identifiants suivants que j'ai créé:
+##### blarre@test.fr    (adresse email)
+##### blarre            (mot de passe)
+Vous avez aussi la possibilité de créer un compte en cliquant sur "Créer un compte".
 
 ## Difficultés rencontrées
 J'avais quelques soucis avec la prise en compte des modifications venant de la fonctionnalté Undo / Redo dans le Local Storage, ce n'était pas simple à réaliser. 
